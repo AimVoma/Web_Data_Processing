@@ -11,7 +11,7 @@
 _______________________________________________________________________________________________
 
 ## Part 2: Perform Entity Extraction and Analysis based on New York Times Articles
-### The basic operation of the PySpark_Parser, is to 
+### The basic operation of the Entity Analysis - New York Times.py, is to 
 * Perform data extraction from New York Times API 
 * Recognise any of the unique entities and their frequency per document
 * Recognise any relational patterns between entities(Co-occurances)
