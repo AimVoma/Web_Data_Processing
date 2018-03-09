@@ -2,8 +2,6 @@
 The currrent codebase was created after group project collaboration with Orestis Roussos(Ms.C. Software Engineering)
 2016, December
 '''
-
-
 import json
 import os
 import gzip
@@ -18,10 +16,7 @@ warc_type_regex = re.compile(r'((WARC-Type:).*)')
 warc_record_id_regex = re.compile(r'((WARC-Record-ID:) <.*>)')
 html_regex = re.compile(r'<html\s*(((?!<html|<\/html>).)+)\s*<\/html>', re.DOTALL)
 
-
-
 sc = SparkContext("local", "knowledge-acquisition")
-
 
 def get_warc_info(file_name):
 	with gzip.open(file_name,'rb') as f:
@@ -97,12 +92,6 @@ def runProcedure(html_page, warc_info):
 	#Pos-tagging the pre-processed words
 	tagged_tokens = pos_tag(tokens)
 	'''
-	
-
-	
-	
-	
-	
 
 	#Chunking
 	# chunked_tokens = chunkParser.parse(tagged_tokens)
@@ -111,14 +100,9 @@ def runProcedure(html_page, warc_info):
 	#Discovering and tagging Named Entities (NER)
 	warc_index+=3
 	warc_id = ((warc_records_ids[warc_index][0]).split(' '))[1]
-			
 	entities = extractUniqueEntities(tagged_tokens)
-	
 	linked_entities = linkEntities(entities)
-
 	return linked_entities
-
-
 
 def linkEntities(entities):
 	linked_entities=[]
@@ -161,22 +145,6 @@ def linkEntities(entities):
 			# print "Got results but no hits for "+entity[1:].strip()
 			continue
 	return linked_entities			
-
-
-
-#def casual_tokenizing(text):
-	#sentences = sent_tokenize(text)
-	#sentences = filter(lambda sent: sent != "", sentences)
-	#tokens = word_tokenize(text)
-	#tagged_tokens = pos_tag(tokens)
-	# print sentences, len(sentences)
-	# raw_input("Hit enter to continue.")
-	# print tokens, len(tokens)
-	# raw_input("Hit enter to continue.")
-	# print tagged_tokens
-	# raw_input("Hit enter to continue.")
-	#return tagged_tokens
-
 
 def main(argv):
 	WARC_RECORD_ID = argv[0]
